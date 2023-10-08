@@ -1,22 +1,17 @@
 package org.browser;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class Browser {
 
@@ -24,8 +19,10 @@ public class Browser {
     public static final String FIREFOX_DRIVER_PATH = "/drivers/geckodriver.exe";
     public static String downloadsPath = System.getProperties().getProperty("user.dir") + File.separator + "downloads";
 
+    public static String browserName;
+
     public static WebDriver driver = null;
-    public static WebDriverWait wait;
+    public static WebDriverWait waitParam;
 
     public static String getChromePath() {
         String chromePath = "/opt/drivers/chromedriver";
@@ -42,7 +39,12 @@ public class Browser {
     }
 
     public static void openBrowser() throws Exception {
-        switch (System.getProperty("browser")) {
+
+        if( browserName.isEmpty()) {
+            browserName = System.getProperty("browser");
+        }
+
+        switch (browserName) {
             case "chrome":
                 initChrome();
                 break;
@@ -53,7 +55,7 @@ public class Browser {
                 throw new Exception("No such browser");
         }
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        waitParam = new WebDriverWait(driver, Duration.ofSeconds(10));
         //Maximize window
         driver.manage().window().maximize();
     }

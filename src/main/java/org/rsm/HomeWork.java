@@ -31,6 +31,7 @@ public class HomeWork
         System.out.println("Output : " + myFooBar.fooBar(inputString.replace(" ","")));
 
         // amazon.co.uk test
+        Browser.browserName = "chrome";
         Amazon amazon = new Amazon();
         try {
             amazon.performTest(  "https:////amazon.co.uk",

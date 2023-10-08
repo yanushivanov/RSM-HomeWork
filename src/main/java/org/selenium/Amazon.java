@@ -59,86 +59,86 @@ public class Amazon {
     }
 
     private void clickOnCookiesButton() {
-        Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(buttonCookies)).click();
+        Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(buttonCookies)).click();
     }
 
     public void findBookByName( String bookName ){
-        Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(searchFieldOnHomePage)).sendKeys(bookName);
-        Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(buttonSubmitSearch)).click();
+        Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(searchFieldOnHomePage)).sendKeys(bookName);
+        Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(buttonSubmitSearch)).click();
     }
 
     public void verifyTheNameOfTheFirstEntryInTheListIs(String nameOfTheBook ) {
-        String bookDescription = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(firstBookInTheList)).getText();
+        String bookDescription = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(firstBookInTheList)).getText();
         assertThat(bookDescription).containsIgnoringCase(nameOfTheBook);
     }
 
     public void verifyTheFirstEntryInTheListHasType(String bookType) {
-        String bookTypeText = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(typeOfTheFirstEntryInTheList)).getText();
+        String bookTypeText = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(typeOfTheFirstEntryInTheList)).getText();
         assertThat(bookTypeText).isEqualToIgnoringCase(bookType);
     }
 
     private void verifyTheFirstEntryInTheListHasPaperbookTypeWithPrice() {
-        String paperBookPriceWholePart = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(paperbackPriceWholeOfTheFirstEntryInTheList)).getText();
-        String paperBookPriceFractionPart = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(paperbackPriceFractionOfTheFirstEntryInTheList)).getText();
+        String paperBookPriceWholePart = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(paperbackPriceWholeOfTheFirstEntryInTheList)).getText();
+        String paperBookPriceFractionPart = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(paperbackPriceFractionOfTheFirstEntryInTheList)).getText();
         firstEntryInListPaperbackPrice = Float.parseFloat(paperBookPriceWholePart) + Float.parseFloat(paperBookPriceFractionPart);
         assertThat(firstEntryInListPaperbackPrice).isGreaterThan(0);
     }
     public void clickOnPaperbackVersionInFirstEntryInTheList() {
-        Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(paperbackLinkInTheFirstEntryInTheList)).click();
+        Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(paperbackLinkInTheFirstEntryInTheList)).click();
     }
 
     public void verifyProductTitle(String bookName) {
-        String productTitleText = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(productTitle)).getText();
+        String productTitleText = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(productTitle)).getText();
         assertThat(productTitleText).containsIgnoringCase(bookName);
 
     }
     public void verifyTheBookIsPaperback() {
-        String productTypeText = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(productType)).getText();
+        String productTypeText = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(productType)).getText();
         assertThat(productTypeText).isEqualToIgnoringCase("Paperback");
     }
     public void verifyTheBookPrice() {
-        String productPriceText = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(productPrice)).getText();
+        String productPriceText = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(productPrice)).getText();
         String numericString = productPriceText.replaceAll("[^\\d.]", "");
         Float priceValue = Float.parseFloat(numericString);
         assertThat(priceValue).isEqualTo(firstEntryInListPaperbackPrice);
     }
 
     public void markProductAsGift() {
-        Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(checkBoxAddGift)).click();
+        Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(checkBoxAddGift)).click();
     }
     public void clickOnAddToBasket() {
-        Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(buttonAddToBasket)).click();
+        Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(buttonAddToBasket)).click();
     }
 
     public void verifyProductIsAddedToBasket() {
-        String confirmationMessage = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(messageAlert)).getText();
+        String confirmationMessage = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(messageAlert)).getText();
         assertThat(confirmationMessage).isEqualToIgnoringCase("Added to Basket");
     }
     public void clickOnGoToBasket() {
-        Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(buttonGoToBasket)).click();
+        Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(buttonGoToBasket)).click();
     }
 
     public void verifyProductTitleInTheBasket(String bookName) {
-        String productTitleText = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(productTitleInTheBasket)).getText();
+        String productTitleText = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(productTitleInTheBasket)).getText();
         assertThat(productTitleText).containsIgnoringCase(bookName);
     }
     public void verifyProductTypeInTheBasket(String productType ) {
-        String productTypeText = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(productTypeInTheBasket)).getText();
+        String productTypeText = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(productTypeInTheBasket)).getText();
         assertThat(productTypeText).containsIgnoringCase(productType);
     }
     public void verifyProductQuantityInTheBasket(int quantityExpected) {
-        String quantityText = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(productQuantityInTheBasket)).getText();
+        String quantityText = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(productQuantityInTheBasket)).getText();
         Integer quantityValue = Integer.parseInt(quantityText);
         assertThat(quantityValue).isEqualTo(quantityExpected);
     }
     public void verifySubTotalAmountInTheBasket() {
-        String subTotalAmountText = Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(subTotalAmountInTheBasket)).getText();
+        String subTotalAmountText = Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(subTotalAmountInTheBasket)).getText();
         String numericString = subTotalAmountText.replaceAll("[^\\d.]", "");
         Float subTotalAmount = Float.parseFloat(numericString);
         assertThat(subTotalAmount).isEqualTo(firstEntryInListPaperbackPrice);
     }
 
     public void verifyProductIsAGift() {
-        Browser.wait.until(ExpectedConditions.visibilityOfElementLocated(checkBoxProductIsAGift)).isSelected();
+        Browser.waitParam.until(ExpectedConditions.visibilityOfElementLocated(checkBoxProductIsAGift)).isSelected();
     }
 }
