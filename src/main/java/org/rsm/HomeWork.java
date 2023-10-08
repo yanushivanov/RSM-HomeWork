@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.browser.Browser;
 import org.foobar.FooBar;
 import org.selenium.Amazon;
+import org.threads.FileTransferManager;
 
 /**
  * Hello world!
@@ -12,9 +13,10 @@ import org.selenium.Amazon;
  */
 public class HomeWork
 {
+    public static final String uploadURL = "http://uploadserver.com";
     public static void iWaitFor(int seconds) {
         try {
-            TimeUnit.SECONDS.sleep((long)seconds);
+            TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException var2) {
             var2.printStackTrace();
         }
@@ -23,10 +25,10 @@ public class HomeWork
     public static void main(String[] args) {
 
         String inputString = args[0];
-        System.out.println("Input  : " + inputString.replaceAll(" ",""));
+        System.out.println("Input  : " + inputString.replace(" ",""));
         FooBar myFooBar = new FooBar();
         //FooBarTests
-        System.out.println("Output : " + myFooBar.fooBar(inputString.replaceAll(" ","")));
+        System.out.println("Output : " + myFooBar.fooBar(inputString.replace(" ","")));
 
         // amazon.co.uk test
         Amazon amazon = new Amazon();
@@ -43,5 +45,12 @@ public class HomeWork
                 Browser.driver.quit();
             }
         }
+
+        //Threads - Download - Upload files
+        FileTransferManager manager = new FileTransferManager();
+        FileTransferManager.TransferReport report = manager.transferFiles(123456); // Provide the packageId here
+        report.printReport();
+        System.out.println("Successful   : " + report.getSuccessCount());
+        System.out.println("Unsuccessful : " + report.getFailureCount());
     }
 }
